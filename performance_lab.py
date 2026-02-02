@@ -23,12 +23,13 @@ def most_frequent(numbers):
 
 """
 Time and Space Analysis for problem 1:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case: O(n) 
+- Worst-case: O(n)
+- Average-case: O(n)
+- Space complexity: O(k)
+- Why this approach? A dictionary provides constant‑time updates and lookups, making it ideal for counting frequencies. This ensures the entire operation runs in linear time, which is optimal because every element must be examined at least once.
+- Could it be optimized? Not asymptotically. Any correct solution must inspect all elements, so \mathrm{O}(n) is the best possible time complexity. Minor micro‑optimizations exist, but none improve the overall Big‑O performance.
+
 """
 
 
@@ -40,17 +41,29 @@ Time and Space Analysis for problem 1:
 # Output: [4, 5, 6, 7]
 
 def remove_duplicates(nums):
-    # Your code here
+    if not isinstance(nums, list):
+        return "Error: input must be a list."
+
+    seen = set()
+    result = []
+
+    for n in nums:
+        if n not in seen:
+            seen.add(n)
+            result.append(n)
+
+    return result
     pass
 
 """
 Time and Space Analysis for problem 2:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case: O(n)
+- Worst-case: O(n)
+- Average-case: O(n)
+- Space complexity: O(k)
+- Why this approach? A set provides constant‑time membership checks, making it ideal for tracking which values have already appeared. Pairing it with a list preserves the original order while still achieving linear time performance.
+- Could it be optimized? Not asymptotically. Any correct solution must inspect each element at least once, so \mathrm{O}(n) is optimal. Python’s built‑in dict.fromkeys() can be shorter, but it has the same time and space complexity.
+
 """
 
 
@@ -86,16 +99,31 @@ Time and Space Analysis for problem 3:
 # add_n_items(6) → should print when resizing happens.
 
 def add_n_items(n):
-    # Your code here
+    def find_pairs(nums, target):
+    if not isinstance(nums, list):
+        return "Error: input must be a list."
+
+    seen = set()
+    pairs = []
+
+    for n in nums:
+        complement = target - n
+        if complement in seen:
+            pairs.append((complement, n))
+        seen.add(n)
+
+    return pairs
     pass
 
 """
 Time and Space Analysis for problem 4:
-- When do resizes happen?
-- What is the worst-case for a single append?
-- What is the amortized time per append overall?
-- Space complexity:
-- Why does doubling reduce the cost overall?
+- When do resizes happen? O(n)
+- What is the worst-case for a single append? O(n)
+- What is the amortized time per append overall? O(n)
+- Space complexity: Using a set allows constant‑time checks for the complement of each number. This avoids the \mathrm{O}(n^2) cost of checking all possible pairs and ensures the algorithm runs in optimal linear time.
+
+- Why does doubling reduce the cost overall? Not in terms of Big‑O. Any correct solution must inspect each element at least once, so \mathrm{O}(n) is optimal. A two‑pointer approach also exists, but it requires sorting the list first, which increases time complexity to \mathrm{O}(n\log n)
+
 """
 
 
@@ -109,7 +137,17 @@ Time and Space Analysis for problem 4:
 # Because: [1, 1+2, 1+2+3, 1+2+3+4]
 
 def running_total(nums):
-    # Your code here
+    if not isinstance(nums, list):
+        return "Error: input must be a list."
+
+    result = []
+    current_sum = 0
+
+    for n in nums:
+        current_sum += n
+        result.append(current_sum)
+
+    return result
     pass
 
 """
@@ -118,6 +156,7 @@ Time and Space Analysis for problem 5:
 - Worst-case:
 - Average-case:
 - Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Why this approach? Maintaining a running accumulator avoids recomputing sums repeatedly. Each prefix sum is computed in constant time, making the entire algorithm linear and efficient
+- Could it be optimized? Not asymptotically. Any correct solution must read each element at least once, so \mathrm{O}(n) time is optimal. The space cost of storing the output list is also unavoidable because the problem requires returning all running totals.
+
 """
