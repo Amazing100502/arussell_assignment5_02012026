@@ -6,8 +6,19 @@
 # Input: [1, 3, 2, 3, 4, 1, 3]
 # Output: 3
 
+
 def most_frequent(numbers):
-    # Your code here
+    if not isinstance(numbers, list):
+        return "Error: input must be a list."
+
+    freq = {}
+
+    for n in numbers:
+        freq[n] = freq.get(n, 0) + 1
+
+    # Return the key with the highest frequency
+    return max(freq, key=freq.get)
+
     pass
 
 """
